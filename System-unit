@@ -6,8 +6,11 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/var/lib/homebridge/vdm10
-ExecStart=/bin/bash -c 'source /var/lib/homebridge/vdm10/bin/activate && var/lib/homebridge/vdm10/bin/python /var/lib/homebridge/vdm10/vdm10.py'
-Restart=always
+ExecStart=/bin/bash -c 'source /var/lib/homebridge/vdm10/bin/activate && /var/lib/homebridge/vdm10/bin/python /var/lib/homebridge/vdm10/vdm10.py'
+StandardOutput=file:/var/log/vdm10.log
+StandardError=file:/var/log/vdm10_error.log
+Restart=on-failure,on-abnormal
+RestartUSec=120s
 
 [Install]
 WantedBy=multi-user.target
